@@ -1,0 +1,59 @@
+# Visual Studio specific files
+.vs/
+*.user
+*.suo
+
+# Build output directories
+bin/
+obj/
+out/
+publish/
+
+# Rider IDE specific files
+.idea/
+*.iml
+
+# ASP.NET & Entity Framework
+appsettings.json
+appsettings.*.json
+*.db
+*.mdf
+*.ldf
+
+# Debug and log files
+*.log
+*.pdb
+*.cache
+*.bak
+
+# Temporary files
+~$*
+*.tmp
+*.ncrunch*
+
+# NuGet packages
+*.nupkg
+packages/
+project.lock.json
+
+# Dotnet tools and configurations
+.dotnet/
+.tools/
+.vscode/
+
+# Resharper files
+*.DotSettings.user
+
+# Generated files
+[Gg]enerated/
+ServiceReferences/
+
+# Docker
+*.dockerignore
+docker-compose.override.yml
+
+# Other common ignores
+[Tt]humbs.db
+desktop.ini
+
+temp/

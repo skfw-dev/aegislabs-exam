@@ -1,0 +1,34 @@
+@using AegisLabsExam.Schemas
+@{ 
+    ViewData["Name"] = "AegisLabsExam";
+    ViewData["Title"] = "Invoice";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Invoice</h1>
+    <table class="table table-striped">
+        <caption>Rotativa Pdf Generated. &copy;@DateTime.Now.Year</caption>
+        <thead class="thead-dark">
+        <tr>
+            <th class="border border-secondary border-1" scope="col">#</th>
+            <th class="border border-secondary border-1" scope="col">ID</th>
+            <th class="border border-secondary border-1" scope="col">Name</th>
+            <th class="border border-secondary border-1" scope="col">Age</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (ViewData["Persons"] is IEnumerable<Person> persons)
+        {
+            foreach (var (idx, person) in persons.Select((person, index) => (index + 1, person)))
+            {
+                <tr scope="row">
+                    <td class="border border-secondary border-1">@idx</td>
+                    <td class="border border-secondary border-1">@person.Id</td>
+                    <td class="border border-secondary border-1">@person.Name</td>
+                    <td class="border border-secondary border-1">@person.Age</td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>
