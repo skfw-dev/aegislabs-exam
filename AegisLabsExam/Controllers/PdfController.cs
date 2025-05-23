@@ -8,14 +8,16 @@ using Rotativa.AspNetCore.Options;
 
 namespace AegisLabsExam.Controllers;
 
+[ApiController]
 [Route("pdf")]
 public class PdfController(IDatabaseHelper dbHelper, IDatabaseHelperScripts dbHelperScripts, IPersonRepository personRepository) : Controller
 {
     private IDatabaseHelper DbHelper => dbHelper;
     private IDatabaseHelperScripts DatabaseHelperScripts => dbHelperScripts;
     private IPersonRepository PersonRepository => personRepository;
+    private DatabaseHelperScriptsExecuteDelegate GetPersonsExec => DatabaseHelperScripts.Exec("GetPersons");
     
-    [Route("")]
+    [HttpGet("")]
     public IActionResult Index()
     {
         var data = new { message = "Hello World" };
@@ -23,10 +25,10 @@ public class PdfController(IDatabaseHelper dbHelper, IDatabaseHelperScripts dbHe
         return Ok(data);
     }
     
-    [Route("download")]
+    [HttpGet("download")]
     public IActionResult Download()
     {
-        var results = DatabaseHelperScripts.FetchAll("EXEC Proc_GetPersons");
+        var results = GetPersonsExec();
         var persons = results.Convert(row => new Person
         {
             Id = row.Field<string>("id")!,

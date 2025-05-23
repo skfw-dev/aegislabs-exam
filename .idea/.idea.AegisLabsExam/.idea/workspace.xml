@@ -11,17 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f3c8c92-c94e-4978-af80-de216bc90ced" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/AegisLabsExam.Tests/ConsoleTestOutputHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AegisLabsExam.Tests/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AegisLabsExam/Assets/Scripts/Person.CTE.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AegisLabsExam.Tests/ExampleTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AegisLabsExam.Tests/ExampleTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AegisLabsExam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AegisLabsExam/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AegisLabsExam/Controllers/PdfController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AegisLabsExam/Controllers/PdfController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AegisLabsExam/Helpers/DatabaseHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AegisLabsExam/Helpers/DatabaseHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AegisLabsExam/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AegisLabsExam/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AegisLabsExam/Repositories/PersonRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AegisLabsExam/Repositories/PersonRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AegisLabsExam/Schemas/Person.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AegisLabsExam/Schemas/Person.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NokoCore/Common/Error.cs" beforeDir="false" afterPath="$PROJECT_DIR$/NokoCore/Common/Error.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NokoCore/Common/Option.cs" beforeDir="false" afterPath="$PROJECT_DIR$/NokoCore/Common/Option.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NokoCore/Common/Result.cs" beforeDir="false" afterPath="$PROJECT_DIR$/NokoCore/Common/Result.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +38,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/27b5f6a8cd128384c77a3328b99a734378c74e8f0bc48dad69a02924ea41ab/ITestOutputHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6fa05d7dbf2e454ce78b261b422234da1f1ccedee678fd997e5ef4afe6df6e/ControllerBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bddd12358e285115aa51f438a78430babf1786f9e91b8361388454b7d9e1ef/ServiceCollectionServiceExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d3f429b376f57cadbb25d5b6b774fdf75dff7b1fbb73b751ce7d4f1399acb77c/DataRowExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/AegisLabsExam/Common/HttpStatusCode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/AegisLabsExam/Common/Pbkdf2Hash.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/AegisLabsExam/Common/Pbkdf2HashConversion.cs" root0="FORCE_HIGHLIGHTING" />
@@ -196,6 +190,8 @@
       <workItem from="1747834048413" duration="8470000" />
       <workItem from="1747881859223" duration="10912000" />
       <workItem from="1747905013365" duration="3012000" />
+      <workItem from="1747914721156" duration="5594000" />
+      <workItem from="1747983493559" duration="1142000" />
     </task>
     <servers />
   </component>

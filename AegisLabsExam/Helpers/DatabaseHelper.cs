@@ -224,9 +224,14 @@ public class DatabaseHelper : IDatabaseHelper
     }
 }
 
+public delegate IDatabaseHelperResults DatabaseHelperScriptsExecuteDelegate(SqlParameter[]? parameters = null);
+public delegate Task<IDatabaseHelperResults> DatabaseHelperScriptsExecuteAsyncDelegate(SqlParameter[]? parameters = null);
+
 public interface IDatabaseHelperScripts : IDatabaseHelper
 {
     public IDatabaseHelper DbHelper { get; }
+    public DatabaseHelperScriptsExecuteDelegate Exec(string name, string prefix = "Proc", string separator = "_");
+    public DatabaseHelperScriptsExecuteAsyncDelegate ExecAsync(string name, string prefix = "Proc", string separator = "_", CancellationToken cancellationToken = default);
 }
 
 public class DatabaseHelperScripts(IDatabaseHelper dbHelper) : IDatabaseHelperScripts
@@ -253,6 +258,17 @@ public class DatabaseHelperScripts(IDatabaseHelper dbHelper) : IDatabaseHelperSc
         return await DbHelper.ExecuteSqlAsync(query, parameters, cancellationToken); 
     }
     
+    public DatabaseHelperScriptsExecuteDelegate Exec(string name, string prefix = "Proc", string separator = "_")
+    {
+        var target = string.Join(separator, [prefix, name]);
+        return parameters => ExecuteSql($"EXEC {target}", parameters);
+    }
+
+    public DatabaseHelperScriptsExecuteAsyncDelegate ExecAsync(string name, string prefix = "Proc", string separator = "_", CancellationToken cancellationToken = default)
+    {
+        var target = string.Join(separator, [prefix, name]);
+        return async parameters => await ExecuteSqlAsync($"EXEC {target}", parameters, cancellationToken);
+    }
 }
 
 public class DatabaseHelperOptions
@@ -264,6 +280,23 @@ public delegate void DatabaseHelperConfigureDelegate(DatabaseHelperOptions optio
 
 public static class DatabaseHelperExtensions
 { 
+    /// <summary>
+    /// Adds a database helper to the service collection and configures it
+    /// with the given <paramref name="configure"/> delegate.
+    /// </summary>
+    /// <remarks>
+    /// The <paramref name="configure"/> delegate is called to configure the
+    /// <see cref="DatabaseHelperOptions"/> which is used to setup the
+    /// database helper scripts.
+    /// 
+    /// The database helper scripts are executed when the
+    /// <see cref="UseDatabaseHelperScripts"/> middleware is used in the
+    /// application or when any controller needs an instance of
+    /// <see cref="IDatabaseHelperScripts"/>.
+    /// </remarks>
+    /// <param name="services">The service collection.</param>
+    /// <param name="configure">A delegate that configures the database helper options.</param>
+    /// <returns>The service collection.</returns>
     public static IServiceCollection AddDatabaseHelper(this IServiceCollection services, DatabaseHelperConfigureDelegate configure)
     {
         var options = new DatabaseHelperOptions();
@@ -272,6 +305,7 @@ public static class DatabaseHelperExtensions
         
         services.AddSingleton<IDatabaseHelperScripts>(serviceProvider =>
         {
+            // Not executed until some controller needs it, or use `UseDatabaseHelperScripts` for triggering
             var dbHelper = serviceProvider.GetRequiredService<IDatabaseHelper>();
             foreach (var query in options.Scripts.Select(File.ReadAllText))
             {
@@ -284,9 +318,20 @@ public static class DatabaseHelperExtensions
         return services;
     }
     
-    // public static IApplicationBuilder UseDatabaseHelper(this IApplicationBuilder app)
-    // {
-    //     var configuration = app.ApplicationServices.GetRequiredService<IConfiguration>();
-    //     return app;
-    // }
+    /// <summary>
+    /// Executes database helper scripts during the application startup.
+    /// </summary>
+    /// <param name="app">The <see cref="IApplicationBuilder"/> to configure.</param>
+    /// <returns>The configured <see cref="IApplicationBuilder"/>.</returns>
+    /// <remarks>
+    /// This method retrieves and executes the registered database helper scripts 
+    /// upon application startup. It ensures that any scripts configured with 
+    /// <see cref="AddDatabaseHelper"/> are executed when the application begins.
+    /// </remarks>
+    public static IApplicationBuilder UseDatabaseHelperScripts(this IApplicationBuilder app)
+    {
+        // Trigger the database helper execution scripts on startup
+        app.ApplicationServices.GetRequiredService<IDatabaseHelperScripts>();
+        return app;
+    }
 }

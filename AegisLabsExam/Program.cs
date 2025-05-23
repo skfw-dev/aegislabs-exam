@@ -20,6 +20,7 @@ builder.Services.AddHsts(options =>
 
 builder.Services.AddDatabaseHelper(options =>
 {
+    // Use the plug-in scripts
     options.Scripts = [ Path.Combine(AppContext.BaseDirectory, "Assets", "Scripts", "Person.CTE.sql") ];
 });
 
@@ -44,6 +45,9 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Trigger the database helper execution scripts
+app.UseDatabaseHelperScripts();
 
 app.UsePyLike3(options =>
 {

@@ -4,24 +4,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AegisLabsExam.Controllers;
 
+[ApiController]
 [Route("")]
 public class HomeController : Controller
 {
-    [Route("")]
+    [HttpGet("")]
     public IActionResult Index()
     {
         ViewData["Title"] = "Home Page";
         return View("Index");
     }
     
-    [Route("privacy")]
+    [HttpGet("privacy")]
     public IActionResult Privacy()
     {
         ViewData["Title"] = "Privacy Policy";
         return View("Privacy");
     }
 
-    [Route("error")]
+    [HttpGet("error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
