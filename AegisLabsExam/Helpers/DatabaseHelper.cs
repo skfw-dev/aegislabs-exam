@@ -261,13 +261,13 @@ public class DatabaseHelperScripts(IDatabaseHelper dbHelper) : IDatabaseHelperSc
     public DatabaseHelperScriptsExecuteDelegate Exec(string name, string prefix = "Proc", string separator = "_")
     {
         var target = string.Join(separator, [prefix, name]);
-        return parameters => ExecuteSql($"EXEC {target}", parameters);
+        return parameters => FetchAll($"EXEC {target}", parameters);
     }
 
     public DatabaseHelperScriptsExecuteAsyncDelegate ExecAsync(string name, string prefix = "Proc", string separator = "_", CancellationToken cancellationToken = default)
     {
         var target = string.Join(separator, [prefix, name]);
-        return async parameters => await ExecuteSqlAsync($"EXEC {target}", parameters, cancellationToken);
+        return async parameters => await FetchAllAsync($"EXEC {target}", parameters, cancellationToken);
     }
 }
 
